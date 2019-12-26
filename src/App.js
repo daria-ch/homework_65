@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter} from "react-router-dom";
+import {Route, Switch} from "react-router";
+import Layout from "./components/Layout/Layout";
+import Pages from "./containers/Pages";
+import AdminPage from "./containers/AdminPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () => (
+    <BrowserRouter>
+        <Layout>
+            <Switch>
+                <Route path='/' exact render={() => <h1 style={{textAlign: 'center'}}>Hello!</h1>}/>
+                <Route path='/pages/admin' exact component={AdminPage}/>
+                <Route path='/pages/:name' component={Pages}/>
+                <Route render={() => <h1>Not Found</h1>}/>
+            </Switch>
+        </Layout>
+    </BrowserRouter>
+);
 
 export default App;
